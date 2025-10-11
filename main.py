@@ -59,10 +59,14 @@ app = FastAPI()
 
 # 4) CORS setup
 ALLOWED_ORIGINS = [
-    "https://www.neurocrest.in",         # your frontend domain, if any
-    "https://<YOUR_FRONTEND_ON_RENDER>", # if hosting frontend on Render
-    "capacitor://localhost",             # Capacitor app
-    "http://localhost:5173",             # local dev
+    "http://localhost:5173",                      # local dev
+    "http://127.0.0.1:5173",                      # alternate local
+    "http://192.168.1.5:5173",                    # your WiFi dev IP
+    "http://10.0.2.2:5173",    
+    "http://10.0.2.2:8000",                      # Emulator backend alias                   # Android emulator alias
+    "capacitor://localhost",                      # Capacitor Android/iOS app
+    "https://frontend-app-ten-opal.vercel.app",   # Vercel production
+    "https://www.neurocrest.in"                   # custom domain (optional)     
 ]
 
 # Allow extra origins from env (comma-separated)
@@ -77,7 +81,7 @@ if EXTRA:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
